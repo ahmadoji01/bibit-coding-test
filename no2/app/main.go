@@ -69,7 +69,9 @@ func main() {
 	au := _movieUcase.NewMovieUsecase(logRepo, timeoutContext)
 	_movieHttpDelivery.NewMovieHandler(e, au)
 
-	//log.Fatal(e.Start(viper.GetString("server.address")))
+	go func() {
+		log.Fatal(e.Start(viper.GetString("server.address")))
+	}()
 
 	lis, err := net.Listen("tcp", ":9000")
 	if err != nil {

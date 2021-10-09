@@ -17,14 +17,13 @@ func main() {
 	defer conn.Close()
 
 	c := movie_grpc.NewMovieHandlerClient(conn)
-	message := movie_grpc.FetchRequest{
-		Searchword: "Batman",
-		Pagination: 1,
+	message := movie_grpc.SingleRequest{
+		Id: "tt0372784",
 	}
 
-	response, err := c.FetchMovie(context.Background(), &message)
+	response, err := c.GetMovie(context.Background(), &message)
 	if err != nil {
-		log.Fatalf("Error while processing request")
+		log.Fatalf(err.Error())
 	}
 
 	log.Println(response)
