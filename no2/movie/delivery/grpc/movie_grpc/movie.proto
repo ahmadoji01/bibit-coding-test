@@ -1,0 +1,56 @@
+syntax="proto3";
+package movie_grpc;
+option go_package = "/movie_grpc;gen";
+
+service MovieHandler {
+  rpc GetMovie (SingleRequest) returns (Movie);
+  rpc FetchMovie (FetchRequest) returns (stream Movie);
+}
+
+message FetchRequest{
+  string searchword=1;
+  int64 pagination=2;
+}
+
+message SingleRequest{
+  string id=1;
+}
+
+message Movie {
+  string Title =1;     
+  string Year=2;      
+  string ImdbID=3;
+  string MovieType=4;
+  string Poster=5;
+
+	string Rated=6;
+  message Rating {
+    string Source=1;
+    string Value=2;
+  }
+
+  repeated Rating Ratings = 7;
+  string Runtime=8;
+	string Genre=9;
+	string Director=10;
+	string Writer=11;
+	string Actors=12;
+	string Plot=13;
+	string Language=14   ;
+	string Country=15    ;
+	string Awards=16     ;
+	string Metascore=17  ;
+	string ImdbRating=18 ;
+	string ImdbVotes=19  ;
+	string DVD=20        ;
+	string BoxOffice=21  ;
+	string Production=22 ;
+	string Website=23    ;
+	string Response=24   ;
+	string Error=25      ;
+}
+
+message MovieRating {
+  string Source=1;
+  string Value=2;
+}
